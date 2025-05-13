@@ -20,9 +20,13 @@ const Actions = ({ fetchUsers, db, users }) => {
 		setName(selectedName)
 
 		if (users.map(({ id }) => id).includes(selectedName)) {
-			setCheckins(users.find(({ id }) => id === selectedName).checkins)
+			const currentUser = users.find(({ id }) => id === selectedName)
+
+			setCheckins(currentUser.checkins)
+			setNewName(currentUser.name)
 		} else {
 			setCheckins(0)
+			setNewName("")
 		}
 	}
 
@@ -41,6 +45,7 @@ const Actions = ({ fetchUsers, db, users }) => {
 			const docRef = doc(db, "users", name)
 			await updateDoc(docRef, {
 				checkins,
+				name: newName,
 			})
 		} else {
 			await addDoc(collection(db, "users"), {
@@ -71,16 +76,12 @@ const Actions = ({ fetchUsers, db, users }) => {
 								</option>
 							))}
 						</select>
-						{name === NEW_USER ? (
-							<>
-								<label>Name</label>
-								<input
-									type='text'
-									onChange={handleNewName}
-									value={newName}
-								/>
-							</>
-						) : null}
+						<label>Name</label>
+						<input
+							type='text'
+							onChange={handleNewName}
+							value={newName}
+						/>
 						<label>Sessions</label>
 						<input
 							type='number'

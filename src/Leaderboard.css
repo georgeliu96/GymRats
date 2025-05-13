@@ -58,6 +58,12 @@
 		.gridItem {
 			position: relative;
 
+			> * {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
 			.medal {
 				position: absolute;
 				left: -20px;
