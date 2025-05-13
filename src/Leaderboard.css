@@ -8,7 +8,7 @@
 }
 
 .Leaderboard {
-	margin: 3rem 20%;
+	margin: 4rem 5%;
 	margin-top: 0;
 	padding: 2rem;
 	background-color: #eeeeee;
@@ -36,20 +36,26 @@
 	}
 
 	.grid {
+		width: 80%;
+
 		em {
 			font-weight: 900;
 			font-style: normal;
-			padding-right: 10px;
+		}
+
+		.headerRow,
+		.gridItem {
+			display: grid;
+			grid-template-columns: 5% 25% 50% 20%;
+			padding-bottom: 10px;
 		}
 
 		.gridItem {
-			display: flex;
 			position: relative;
-			padding-bottom: 10px;
 
 			.medal {
 				position: absolute;
-				left: -25px;
+				left: -20px;
 				font-size: 20px;
 			}
 

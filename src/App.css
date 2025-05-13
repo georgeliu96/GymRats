@@ -18,6 +18,8 @@
 		width: 100%;
 		opacity: 0.2;
 		pointer-events: none;
+		padding: 0;
+		padding-top: 1rem;
 	}
 
 	> header {

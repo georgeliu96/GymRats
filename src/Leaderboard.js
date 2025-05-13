@@ -7,20 +7,31 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 
 const Leaderboard = ({ users, loading }) => {
-	const medals = (index) => {
-		const colors = ["gold", "silver", "bronze"]
+	const medals = (rank) => {
+		const colors = [null, "gold", "silver", "bronze"]
 
-		if (index < 3) {
+		if (rank <= 3) {
 			return (
 				<FontAwesomeIcon
 					icon={faMedal}
-					className={`medal ${colors[index]}`}
+					className={`medal ${colors[rank]}`}
 				/>
 			)
 		}
 	}
 
 	const sorted = users.sort((a, b) => b.checkins - a.checkins)
+	sorted.forEach(
+		(user, index) =>
+			(sorted[index] = {
+				...user,
+				rank:
+					parseInt(user.checkins) ===
+					parseInt(sorted[index - 1]?.checkins)
+						? sorted[index - 1].rank
+						: index + 1,
+			})
+	)
 
 	return (
 		<section className='Leaderboard'>
@@ -32,13 +43,18 @@ const Leaderboard = ({ users, loading }) => {
 				<FontAwesomeIcon className='spinner' icon={faSpinner} />
 			) : (
 				<div className='grid'>
-					{sorted.map(({ name, checkins }, index) => (
+					<section className='headerRow'>
+						<div></div>
+						<div>Rank</div>
+						<div>Name</div>
+						<div>Checkins</div>
+					</section>
+					{sorted.map(({ name, checkins, rank }, index) => (
 						<div className='gridItem' key={index}>
-							{medals(index)}
-							<em>{index + 1}.</em>
-							<div>
-								{name}: {checkins}
-							</div>
+							<div>{medals(rank)}</div>
+							<em>{rank}.</em>
+							<div>{name}</div>
+							<div>{checkins}</div>
 						</div>
 					))}
 				</div>
