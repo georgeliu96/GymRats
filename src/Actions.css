@@ -23,7 +23,8 @@
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	right: -200vw;
+	left: 200vw;
+	right: -300vw;
 	transition: 0.2s;
 	display: flex;
 	align-items: center;
