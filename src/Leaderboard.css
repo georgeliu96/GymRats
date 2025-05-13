@@ -8,8 +8,8 @@
 }
 
 .Leaderboard {
-	margin: 4rem 5%;
-	margin-top: 0;
+	margin: 0 5%;
+	margin-bottom: 2rem;
 	padding: 2rem;
 	background-color: #eeeeee;
 	border-radius: 30px;
@@ -17,7 +17,7 @@
 	flex-direction: column;
 	align-items: center;
 	color: #3a4750;
-	font-weight: 700;
+	font-weight: 500;
 
 	.spinner {
 		font-size: 30px;
@@ -41,6 +41,11 @@
 		em {
 			font-weight: 900;
 			font-style: normal;
+		}
+
+		.headerRow {
+			font-size: 1.1rem;
+			font-weight: 900;
 		}
 
 		.headerRow,

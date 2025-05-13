@@ -52,8 +52,8 @@ function App() {
 				<h1>Gym Rats</h1>
 				<FontAwesomeIcon icon={faDumbbell} />
 			</header>
-			<Actions users={users} db={db} fetchUsers={fetchUsers} />
 			<Leaderboard users={users} loading={loading} />
+			<Actions users={users} db={db} fetchUsers={fetchUsers} />
 			<img src='./gym-rats.png' className='bgLogo' alt='background' />
 		</div>
 	)
