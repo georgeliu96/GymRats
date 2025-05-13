@@ -1,0 +1,68 @@
+@keyframes ckw {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.Leaderboard {
+	margin: 3rem 20%;
+	margin-top: 0;
+	padding: 2rem;
+	background-color: #eeeeee;
+	border-radius: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: #3a4750;
+
+	.spinner {
+		font-size: 30px;
+		animation: ckw 2s;
+	}
+
+	.header {
+		display: flex;
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin-bottom: 1rem;
+
+		svg {
+			padding-right: 10px;
+		}
+	}
+
+	.grid {
+		em {
+			font-weight: 700;
+			font-style: normal;
+			padding-right: 10px;
+		}
+
+		.gridItem {
+			display: flex;
+			position: relative;
+			padding-bottom: 10px;
+
+			.medal {
+				position: absolute;
+				left: -25px;
+				font-size: 20px;
+			}
+
+			.gold {
+				color: gold;
+			}
+
+			.silver {
+				color: silver;
+			}
+
+			.bronze {
+				color: #804a00;
+			}
+		}
+	}
+}

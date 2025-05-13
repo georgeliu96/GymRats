@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css"
+import { useState, useEffect, useCallback } from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app"
+import { collection, getDocs, getFirestore } from "firebase/firestore"
+import Leaderboard from "./Leaderboard"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faDumbbell } from "@fortawesome/free-solid-svg-icons"
+import Actions from "./Actions"
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+	apiKey: "AIzaSyAXZ_bI8xuuDEO7bOZTKTXeYZqQ7XlSKAw",
+	authDomain: "gymrats-590f2.firebaseapp.com",
+	projectId: "gymrats-590f2",
+	storageBucket: "gymrats-590f2.firebasestorage.app",
+	messagingSenderId: "285236880861",
+	appId: "1:285236880861:web:903687a9d7188b70784234",
 }
 
-export default App;
+function App() {
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig)
+	const db = getFirestore(app)
+
+	const [users, setUsers] = useState([])
+	const [loading, setLoading] = useState(false)
+
+	const fetchUsers = useCallback(async () => {
+		setLoading(true)
+		await getDocs(collection(db, "users")).then((snapshot) => {
+			const data = snapshot.docs.map((doc) => ({
+				...doc.data(),
+				id: doc.id,
+			}))
+
+			setUsers(data)
+			setLoading(false)
+		})
+	}, [db])
+
+	useEffect(() => {
+		fetchUsers()
+	}, [db, fetchUsers])
+
+	return (
+		<div className='App'>
+			<header className='App-header'>
+				<h1>Gym Rats</h1>
+				<FontAwesomeIcon icon={faDumbbell} />
+			</header>
+			<Actions users={users} db={db} fetchUsers={fetchUsers} />
+			<Leaderboard users={users} loading={loading} />
+		</div>
+	)
+}
+
+export default App
