@@ -43,6 +43,7 @@
 
 		&:hover {
 			cursor: pointer;
+			color: rgb(8, 7, 70);
 		}
 	}
 }
