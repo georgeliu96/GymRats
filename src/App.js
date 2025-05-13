@@ -54,6 +54,7 @@ function App() {
 			</header>
 			<Actions users={users} db={db} fetchUsers={fetchUsers} />
 			<Leaderboard users={users} loading={loading} />
+			<img src='./gym-rats.png' className='bgLogo' />
 		</div>
 	)
 }

@@ -17,6 +17,7 @@
 	flex-direction: column;
 	align-items: center;
 	color: #3a4750;
+	font-weight: 700;
 
 	.spinner {
 		font-size: 30px;
@@ -36,7 +37,7 @@
 
 	.grid {
 		em {
-			font-weight: 700;
+			font-weight: 900;
 			font-style: normal;
 			padding-right: 10px;
 		}
