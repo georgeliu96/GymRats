@@ -35,4 +35,14 @@
 		justify-content: center;
 		align-items: center;
 	}
+
+	.rules {
+		color: rgb(47, 45, 145);
+		text-decoration: underline;
+		-webkit-tap-highlight-color: transparent;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }

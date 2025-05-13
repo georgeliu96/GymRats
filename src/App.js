@@ -8,6 +8,7 @@ import Leaderboard from "./Leaderboard"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDumbbell } from "@fortawesome/free-solid-svg-icons"
 import Actions from "./Actions"
+import Rules from "./Rules"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,6 +29,7 @@ function App() {
 
 	const [users, setUsers] = useState([])
 	const [loading, setLoading] = useState(false)
+	const [tray, setTray] = useState(false)
 
 	const fetchUsers = useCallback(async () => {
 		setLoading(true)
@@ -54,6 +56,10 @@ function App() {
 			</header>
 			<Leaderboard users={users} loading={loading} />
 			<Actions users={users} db={db} fetchUsers={fetchUsers} />
+			<div className='rules' onClick={() => setTray(true)}>
+				Terms & Conditions
+			</div>
+			<Rules showTray={tray} closeTray={() => setTray(false)} />
 			<img src='./gym-rats.png' className='bgLogo' alt='background' />
 		</div>
 	)
