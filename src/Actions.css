@@ -7,9 +7,10 @@
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
-	transition: 0.5s;
+	transition: 0.4s;
 	border-radius: 5px;
 	font-family: "Underdog", system-ui;
+	font-weight: 900;
 
 	&:hover {
 		background-color: #126e82;
@@ -22,8 +23,7 @@
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	right: -100vw;
-	visibility: hidden;
+	right: -200vw;
 	transition: 0.2s;
 	display: flex;
 	align-items: center;
@@ -34,20 +34,21 @@
 	}
 
 	&.showTray {
-		visibility: visible;
 		left: 0;
 		right: 0;
 		background-color: #00000040;
 	}
 
 	.tray {
-		width: 50%;
+		width: 70%;
 		background-color: #ffffff;
 		padding: 2rem;
 		border-radius: 10px;
 		position: relative;
 		top: -15%;
 		z-index: 10000000;
+		display: flex;
+		flex-direction: column;
 
 		h4 {
 			margin-top: 0;
@@ -75,6 +76,7 @@
 
 		.button {
 			margin-top: 1rem;
+			align-self: center;
 		}
 	}
 }
@@ -88,4 +90,5 @@ select {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
+	margin-bottom: 1.5rem;
 }
