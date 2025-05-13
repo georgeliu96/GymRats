@@ -47,7 +47,7 @@ const Leaderboard = ({ users, loading }) => {
 						<div></div>
 						<div>Rank</div>
 						<div>Name</div>
-						<div>Checkins</div>
+						<div>Sessions</div>
 					</section>
 					{sorted.map(({ name, checkins, rank }, index) => (
 						<div className='gridItem' key={index}>

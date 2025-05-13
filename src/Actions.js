@@ -59,10 +59,10 @@ const Actions = ({ fetchUsers, db, users }) => {
 				className={`${tray ? "showTray" : "hideTray"} trayContainer`}
 				onClick={closeTray}>
 				<div className='tray' onClick={(e) => e.stopPropagation()}>
-					<h4>Edit Checkins</h4>
+					<h4>Edit Sessions</h4>
 					<FontAwesomeIcon icon={faXmark} onClick={closeTray} />
 					<div className='form'>
-						<label>Edit Check Ins For?</label>
+						<label>Edit Sessions For?</label>
 						<select onChange={handleSelectName} value={name}>
 							<option value={NEW_USER}>NEW USER</option>
 							{users?.map(({ name, id }, index) => (
@@ -81,7 +81,7 @@ const Actions = ({ fetchUsers, db, users }) => {
 								/>
 							</>
 						) : null}
-						<label>Checkins</label>
+						<label>Sessions</label>
 						<input
 							type='number'
 							onChange={handleCheckins}
@@ -94,7 +94,7 @@ const Actions = ({ fetchUsers, db, users }) => {
 				</div>
 			</div>
 			<button className='button' onClick={openTray}>
-				Edit Checkins
+				EDIT
 			</button>
 		</section>
 	)
