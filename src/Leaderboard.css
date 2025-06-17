@@ -64,6 +64,23 @@
 				text-overflow: ellipsis;
 			}
 
+			.checkins {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				width: 40px;
+
+				.warning {
+					color: yellow;
+
+					path {
+						stroke: black;
+						stroke-width: 20px;
+						stroke-linejoin: round;
+					}
+				}
+			}
+
 			.medal {
 				position: absolute;
 				left: -20px;

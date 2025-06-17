@@ -36,14 +36,36 @@
 		align-items: center;
 	}
 
-	.rules {
+	.rules,
+	.generate {
 		color: rgb(47, 45, 145);
 		text-decoration: underline;
 		-webkit-tap-highlight-color: transparent;
+		width: fit-content;
+		margin: 0 auto;
 
 		&:hover {
 			cursor: pointer;
 			color: rgb(8, 7, 70);
+		}
+	}
+
+	.copied {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 10%;
+		opacity: 0;
+		pointer-events: none;
+		transition: 0.5s;
+		background-color: white;
+		padding: 30px;
+		border-radius: 10px;
+		width: fit-content;
+		margin: 0 auto;
+
+		&.show {
+			opacity: 100;
 		}
 	}
 }

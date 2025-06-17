@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDumbbell } from "@fortawesome/free-solid-svg-icons"
 import Actions from "./Actions"
 import Rules from "./Rules"
+import { appendNames, isPreviousWeek } from "./util"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,6 +31,7 @@ function App() {
 	const [users, setUsers] = useState([])
 	const [loading, setLoading] = useState(false)
 	const [tray, setTray] = useState(false)
+	const [showCopied, setShowCopied] = useState(false)
 
 	const fetchUsers = useCallback(async () => {
 		setLoading(true)
@@ -48,6 +50,34 @@ function App() {
 		fetchUsers()
 	}, [db, fetchUsers])
 
+	const anyLate = () =>
+		users.some(({ lastModifiedTimestamp }) =>
+			isPreviousWeek(lastModifiedTimestamp)
+		)
+
+	const generateAnnouncement = () => {
+		const lateUsers = users.filter(({ lastModifiedTimestamp }) =>
+			isPreviousWeek(lastModifiedTimestamp)
+		)
+
+		const names = lateUsers.map(({ name }) => name)
+
+		return `${appendNames(names)} ${
+			names.length > 1 ? "have" : "has"
+		} not updated in over a week. Please visit https://gymrats-590f2.web.app/ and update your checkins!`
+	}
+
+	const copyAnnouncement = async () => {
+		const announcement = generateAnnouncement()
+
+		await navigator.clipboard.writeText(announcement)
+		setShowCopied(true)
+
+		setTimeout(() => {
+			setShowCopied(false)
+		}, 1000)
+	}
+
 	return (
 		<div className='App'>
 			<header className='App-header'>
@@ -59,7 +89,15 @@ function App() {
 			<div className='rules' onClick={() => setTray(true)}>
 				Terms & Conditions
 			</div>
+			{anyLate() ? (
+				<div className='generate' onClick={() => copyAnnouncement()}>
+					Generate Announcement
+				</div>
+			) : null}
 			<Rules showTray={tray} closeTray={() => setTray(false)} />
+			<div className={`copied ${showCopied ? "show" : ""}`}>
+				Copied To Clipboard
+			</div>
 			<img src='./gym-rats.png' className='bgLogo' alt='background' />
 		</div>
 	)

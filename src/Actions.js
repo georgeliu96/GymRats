@@ -3,6 +3,7 @@ import "./Actions.css"
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore"
 import { useState } from "react"
 import { faXmark } from "@fortawesome/free-solid-svg-icons"
+import moment from "moment"
 
 const Actions = ({ fetchUsers, db, users }) => {
 	const NEW_USER = "NEW USER"
@@ -40,17 +41,20 @@ const Actions = ({ fetchUsers, db, users }) => {
 
 	const submitForm = async () => {
 		const isEdit = name !== NEW_USER
+		const currentDate = moment().format("MM/DD/YY")
 
 		if (isEdit) {
 			const docRef = doc(db, "users", name)
 			await updateDoc(docRef, {
 				checkins,
 				name: newName,
+				lastModifiedTimestamp: currentDate,
 			})
 		} else {
 			await addDoc(collection(db, "users"), {
 				name: newName,
 				checkins,
+				lastModifiedTimestamp: currentDate,
 			})
 		}
 

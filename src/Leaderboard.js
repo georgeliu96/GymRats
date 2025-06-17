@@ -4,7 +4,9 @@ import {
 	faChartSimple,
 	faMedal,
 	faSpinner,
+	faWarning,
 } from "@fortawesome/free-solid-svg-icons"
+import { isPreviousWeek } from "./util"
 
 const Leaderboard = ({ users, loading }) => {
 	const medals = (rank) => {
@@ -33,6 +35,14 @@ const Leaderboard = ({ users, loading }) => {
 			})
 	)
 
+	const warning = (lastModifiedTimestamp) => {
+		return (
+			<div title={lastModifiedTimestamp}>
+				<FontAwesomeIcon icon={faWarning} className='warning' />
+			</div>
+		)
+	}
+
 	return (
 		<section className='Leaderboard'>
 			<header className='header'>
@@ -49,14 +59,24 @@ const Leaderboard = ({ users, loading }) => {
 						<div>Name</div>
 						<div>Sessions</div>
 					</section>
-					{sorted.map(({ name, checkins, rank }, index) => (
-						<div className='gridItem' key={index}>
-							<div>{medals(rank)}</div>
-							<em>{rank}.</em>
-							<div>{name}</div>
-							<div>{checkins}</div>
-						</div>
-					))}
+					{sorted.map(
+						(
+							{ name, checkins, rank, lastModifiedTimestamp },
+							index
+						) => (
+							<div className='gridItem' key={index}>
+								<div>{medals(rank)}</div>
+								<em>{rank}.</em>
+								<div>{name}</div>
+								<div className={"checkins"}>
+									<div>{checkins}</div>
+									{isPreviousWeek(lastModifiedTimestamp)
+										? warning(lastModifiedTimestamp)
+										: null}
+								</div>
+							</div>
+						)
+					)}
 				</div>
 			)}
 		</section>
