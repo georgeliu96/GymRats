@@ -4,7 +4,12 @@ export const isPreviousWeek = (timestamp) => {
 	const now = moment()
 	const lastCheckin = moment(timestamp)
 
-	return now.week() > lastCheckin.week()
+	const currentDay = now.dayOfYear()
+	const lastCheckinDay = lastCheckin.dayOfYear()
+
+	return currentDay < lastCheckinDay
+		? currentDay + 365 - lastCheckinDay > 7
+		: currentDay - lastCheckinDay >= 7
 }
 
 export const appendNames = (names) => {
